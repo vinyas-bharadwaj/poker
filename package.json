@@ -1,0 +1,26 @@
+{
+  "name": "poker-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev": "concurrently -n \"BACKEND,FRONTEND\" -c \"blue,green\" \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "npm --workspace=backend run dev",
+    "dev:frontend": "npm --workspace=frontend run dev",
+    "build": "npm --workspace=backend run build && npm --workspace=frontend run build",
+    "lint": "npm --workspace=backend run lint && npm --workspace=frontend run lint",
+    "format": "npm --workspace=backend run format && npm --workspace=frontend run format",
+    "db:up": "docker compose up -d postgres",
+    "db:down": "docker compose down",
+    "db:migrate": "npm --workspace=backend run db:migrate",
+    "db:generate": "npm --workspace=backend run db:generate",
+    "db:seed": "npm --workspace=backend run db:seed",
+    "db:studio": "npm --workspace=backend run db:studio"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

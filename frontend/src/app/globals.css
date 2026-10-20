@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Enforce classic warm light theme */
+  color-scheme: light;
+
+  --background: 38 33% 97%; /* #FAF7F2 - warm cozy ivory/parchment */
+  --foreground: 20 12% 16%; /* #2C2523 - deep espresso charcoal */
+
+  --card: 40 30% 99%; /* #FDFCF9 - pure warm paper */
+  --card-foreground: 20 12% 16%;
+
+  --popover: 40 30% 99%;
+  --popover-foreground: 20 12% 16%;
+
+  --primary: 154 44% 21%; /* #1E4D38 - heritage forest green */
+  --primary-foreground: 40 30% 99%;
+
+  --secondary: 36 24% 93%; /* #F2EEE5 - soft warm linen */
+  --secondary-foreground: 20 12% 20%;
+
+  --muted: 36 20% 92%; /* #F0EBE0 */
+  --muted-foreground: 24 8% 42%; /* #706760 - accessible 4.5+:1 ratio */
+
+  --accent: 40 45% 56%; /* #C5A059 - antique brass/gold */
+  --accent-foreground: 20 12% 12%;
+
+  --destructive: 356 60% 38%; /* #9C202D - vintage wine red */
+  --destructive-foreground: 40 30% 99%;
+
+  --border: 36 18% 85%; /* #DFD7CB - soft warm hairline border */
+  --input: 36 18% 85%;
+  --ring: 154 44% 21%;
+
+  --radius: 0.5rem; /* classic, restrained corner radius */
+
+  --scrollbar-thumb: #c7b9a0;
+  --scrollbar-track: #f5f0e6;
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
+  min-height: 100vh;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Fallback for WebKit scrollbars wrapped in @supports not per guidance */
+@supports not (scrollbar-color: auto) {
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 4px;
+  }
+}
+
+/* Classic Heritage Poker Felt */
+.classic-felt {
+  background: radial-gradient(circle at 50% 45%, #255d44 0%, #1a4532 55%, #123324 100%);
+  border: 10px solid #3c2415;
+  box-shadow:
+    inset 0 2px 10px rgba(0, 0, 0, 0.4),
+    0 10px 25px -5px rgba(44, 37, 35, 0.2);
+}
+
+/* Classic playing card styling */
+.classic-card {
+  background: #ffffff;
+  border: 1px solid #d9d2c5;
+  box-shadow:
+    0 2px 6px -1px rgba(44, 37, 35, 0.1),
+    0 1px 2px 0 rgba(44, 37, 35, 0.06);
+}
+
+/* Subtle classic hairline rule */
+.classic-divider {
+  border-top: 1px solid #e8e1d5;
+}
