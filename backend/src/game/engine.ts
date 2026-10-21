@@ -382,7 +382,7 @@ export class TexasHoldemEngine {
     this.currentTurnUserId = null;
   }
 
-  private awardPotToLastStandingPlayer(lastPlayer: PlayerInGame): void {
+  public awardPotToLastStandingPlayer(lastPlayer: PlayerInGame): void {
     const pots = PotManager.buildPots(this.players);
     const totalPot = pots.reduce((sum, p) => sum + p.amount, 0);
 

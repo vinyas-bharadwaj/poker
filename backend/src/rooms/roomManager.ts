@@ -222,12 +222,42 @@ class RoomManager {
       return { roomClosed: true, removedPlayer };
     }
 
-    // If an active game is running, fold the leaving player so table isn't stalled
+    // If an active game is running, fold the leaving player so the table isn't stalled.
+    // We cannot use handlePlayerAction here because it enforces turn order —
+    // a player leaving when it's NOT their turn would be silently rejected, freezing the game.
+    // Instead we directly mutate the engine state and advance the turn if needed.
     const engine = this.engines.get(cleanCode);
     if (engine && engine.round !== 'idle' && engine.round !== 'showdown') {
       const engPlayer = engine.players.find((p) => p.userId === removedPlayer.userId);
-      if (engPlayer && !engPlayer.folded) {
-        engine.handlePlayerAction(removedPlayer.userId, 'fold');
+      if (engPlayer && !engPlayer.folded && !engPlayer.isAllIn) {
+        // Directly mark as folded
+        engPlayer.folded = true;
+
+        // Check if this was the current turn player — if so, advance to next player
+        if (engine.currentTurnUserId === removedPlayer.userId) {
+          // Find next active player
+          const currentSeat = engine.players.findIndex(
+            (p) => p.userId === removedPlayer.userId
+          );
+          let nextSeat = currentSeat;
+          let found = false;
+          for (let i = 1; i < engine.players.length; i++) {
+            nextSeat = (currentSeat + i) % engine.players.length;
+            const candidate = engine.players[nextSeat];
+            if (!candidate.folded && !candidate.isAllIn) {
+              found = true;
+              break;
+            }
+          }
+          engine.currentTurnUserId = found ? engine.players[nextSeat].userId : null;
+        }
+
+        // Check if only one player remains un-folded
+        const remaining = engine.players.filter((p) => !p.folded);
+        if (remaining.length === 1) {
+          // Award pot to last standing player using the engine's internal method
+          engine.awardPotToLastStandingPlayer(remaining[0]);
+        }
       }
     }
 

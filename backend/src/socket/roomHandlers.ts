@@ -102,11 +102,18 @@ export function setupRoomHandlers(io: SocketIOServer, socket: Socket) {
         // Broadcast to everyone in the room that player state is updated
         io.to(cleanCode).emit('room:updated', result.room);
 
-        // If game is in progress, send current game state to the joining/reconnecting player
+        // If game is in progress, send current game state:
+        // - to the reconnecting player individually (they need their hole cards)
+        // - also re-broadcast to all players so everyone re-syncs (fixes stale state after peer reconnect)
         if (result.room.status === 'in_progress') {
           const engine = roomManager.getEngine(cleanCode);
           if (engine) {
+            // Send the reconnecting player their personalised state first
             socket.emit('game:state', engine.getClientState(payload.userId));
+            if (result.reconnected) {
+              // Re-broadcast to all others so their view is also up-to-date
+              broadcastGameState(io, cleanCode);
+            }
           }
         }
 
@@ -419,6 +426,8 @@ export function setupRoomHandlers(io: SocketIOServer, socket: Socket) {
           timestamp: Date.now(),
         });
 
+        // CRITICAL: Always broadcast fresh game state after a player is removed mid-hand.
+        // Without this, other clients stay frozen showing the disconnected player's turn.
         if (info.room.status === 'in_progress') {
           broadcastGameState(io, info.roomCode);
         }
