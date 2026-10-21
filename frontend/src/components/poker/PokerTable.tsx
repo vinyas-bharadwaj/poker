@@ -340,9 +340,9 @@ export const PokerTable: React.FC<PokerTableProps> = ({
       )}
 
       {/* The Felt Table Container */}
-      <div className="relative w-full h-[390px] xs:h-[420px] sm:h-auto sm:aspect-[16/9] sm:min-h-[420px] sm:max-h-[520px] rounded-[48px] sm:rounded-[100px] border-[6px] sm:border-[10px] border-[#3e2723] bg-[#1a382b] shadow-2xl p-2 sm:p-6 overflow-hidden select-none">
+      <div className="relative w-full h-[450px] xs:h-[480px] sm:h-auto sm:aspect-[16/9] sm:min-h-[420px] sm:max-h-[520px] rounded-[44px] sm:rounded-[100px] border-[5px] sm:border-[10px] border-[#3e2723] bg-[#1a382b] shadow-2xl p-2 sm:p-6 overflow-hidden select-none">
         {/* Subtle Felt Texture & Inner Inlay Line */}
-        <div className="absolute inset-1.5 sm:inset-3 rounded-[40px] sm:rounded-[85px] border border-brass/25 pointer-events-none" />
+        <div className="absolute inset-1.5 sm:inset-3 rounded-[38px] sm:rounded-[85px] border border-brass/25 pointer-events-none" />
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:12px_12px] pointer-events-none" />
 
         {/* Dynamic Opponent Seats positioned around the table perimeter */}
@@ -363,19 +363,19 @@ export const PokerTable: React.FC<PokerTableProps> = ({
         )}
 
         {/* Table Center: Pot and Community Cards */}
-        <div className="absolute left-1/2 top-[44%] -translate-x-1/2 -translate-y-1/2 z-10 flex flex-col items-center justify-center space-y-2 sm:space-y-3 w-full max-w-md px-1 sm:px-2 pointer-events-none">
+        <div className="absolute left-1/2 top-[41%] -translate-x-1/2 -translate-y-1/2 z-10 flex flex-col items-center justify-center space-y-1.5 sm:space-y-3 w-full max-w-xs sm:max-w-md px-1 sm:px-2 pointer-events-none">
           {/* Main Pot Display */}
           <motion.div
             key={gameState.pot}
             initial={{ scale: 0.92 }}
             animate={{ scale: 1 }}
             transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-            className="bg-[#12261d]/95 border border-brass/40 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full shadow-classic flex items-center gap-1.5 sm:gap-2"
+            className="bg-[#12261d]/95 border border-brass/40 px-2.5 sm:px-4 py-0.5 sm:py-1.5 rounded-full shadow-classic flex items-center gap-1 sm:gap-2"
           >
-            <span className="text-[9px] sm:text-[10px] font-mono tracking-wider text-parchment-200 uppercase">
+            <span className="text-[8px] sm:text-[10px] font-mono tracking-wider text-parchment-200 uppercase">
               Pot
             </span>
-            <span className="font-mono font-bold text-sm sm:text-base text-brass">
+            <span className="font-mono font-bold text-xs sm:text-base text-brass">
               {formatChips(gameState.pot)}
             </span>
           </motion.div>
@@ -395,8 +395,8 @@ export const PokerTable: React.FC<PokerTableProps> = ({
                       <PlayingCard card={card} size="md" className="shadow-lg" />
                     </motion.div>
                   ) : (
-                    <div className="w-11 h-16 sm:w-14 sm:h-20 rounded sm:rounded-md border border-dashed border-parchment-100/20 bg-[#12261d]/40 flex items-center justify-center">
-                      <span className="text-parchment-200/20 text-[9px] sm:text-xs font-mono">
+                    <div className="w-9 h-13 sm:w-14 sm:h-20 rounded sm:rounded-md border border-dashed border-parchment-100/20 bg-[#12261d]/40 flex items-center justify-center">
+                      <span className="text-parchment-200/20 text-[8px] sm:text-xs font-mono">
                         {idx < 3 ? 'FLOP' : idx === 3 ? 'TURN' : 'RIVER'}
                       </span>
                     </div>
@@ -414,14 +414,14 @@ export const PokerTable: React.FC<PokerTableProps> = ({
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.25 }}
-                className="bg-parchment-50/95 border border-brass text-espresso px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg shadow-classic text-center max-w-[92%] sm:max-w-md space-y-1 pointer-events-auto"
+                className="bg-parchment-50/95 border border-brass text-espresso px-2.5 py-1 sm:px-4 sm:py-2 rounded-lg shadow-classic text-center max-w-[90%] sm:max-w-md space-y-0.5 sm:space-y-1 pointer-events-auto"
               >
-                <div className="flex items-center justify-center gap-1.5 text-xs font-serif font-bold text-wine">
-                  <Trophy className="h-3.5 w-3.5 text-brass" />
+                <div className="flex items-center justify-center gap-1 text-[11px] sm:text-xs font-serif font-bold text-wine">
+                  <Trophy className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-brass" />
                   <span>Hand Result</span>
                 </div>
                 {gameState.showdown.winners.map((w) => (
-                  <div key={w.userId} className="text-xs font-serif">
+                  <div key={w.userId} className="text-[10px] sm:text-xs font-serif">
                     <span className="font-semibold text-felt">{w.username}</span> won{' '}
                     <strong className="text-espresso font-mono">{formatChips(w.amountWon)}</strong>{' '}
                     <span className="text-espresso-muted">({w.handDescription})</span>
@@ -713,45 +713,45 @@ export const PokerTable: React.FC<PokerTableProps> = ({
 // Dynamic Opponent Seat Position Helper
 function getOpponentPosition(index: number, total: number): React.CSSProperties {
   const PRESETS: Record<number, { left: string; top: string }[]> = {
-    1: [{ left: '50%', top: '16%' }],
+    1: [{ left: '50%', top: '12%' }],
     2: [
-      { left: '26%', top: '16%' },
-      { left: '74%', top: '16%' },
+      { left: '26%', top: '13%' },
+      { left: '74%', top: '13%' },
     ],
     3: [
-      { left: '14%', top: '34%' },
-      { left: '50%', top: '15%' },
-      { left: '86%', top: '34%' },
+      { left: '13%', top: '28%' },
+      { left: '50%', top: '10%' },
+      { left: '87%', top: '28%' },
     ],
     4: [
       { left: '12%', top: '40%' },
-      { left: '30%', top: '16%' },
-      { left: '70%', top: '16%' },
+      { left: '27%', top: '12%' },
+      { left: '73%', top: '12%' },
       { left: '88%', top: '40%' },
     ],
     5: [
-      { left: '11%', top: '45%' },
-      { left: '24%', top: '20%' },
-      { left: '50%', top: '14%' },
-      { left: '76%', top: '20%' },
-      { left: '89%', top: '45%' },
+      { left: '12%', top: '46%' },
+      { left: '19%', top: '20%' },
+      { left: '50%', top: '10%' },
+      { left: '81%', top: '20%' },
+      { left: '88%', top: '46%' },
     ],
     6: [
-      { left: '10%', top: '48%' },
-      { left: '18%', top: '24%' },
-      { left: '38%', top: '14%' },
-      { left: '62%', top: '14%' },
-      { left: '82%', top: '24%' },
-      { left: '90%', top: '48%' },
+      { left: '12%', top: '52%' },
+      { left: '14%', top: '30%' },
+      { left: '33%', top: '11%' },
+      { left: '67%', top: '11%' },
+      { left: '86%', top: '30%' },
+      { left: '88%', top: '52%' },
     ],
     7: [
-      { left: '10%', top: '50%' },
-      { left: '16%', top: '30%' },
-      { left: '30%', top: '16%' },
-      { left: '50%', top: '13%' },
-      { left: '70%', top: '16%' },
-      { left: '84%', top: '30%' },
-      { left: '90%', top: '50%' },
+      { left: '12%', top: '56%' },
+      { left: '14%', top: '36%' },
+      { left: '23%', top: '17%' },
+      { left: '50%', top: '9%' },
+      { left: '77%', top: '17%' },
+      { left: '86%', top: '36%' },
+      { left: '88%', top: '56%' },
     ],
   };
 
@@ -769,8 +769,8 @@ function getOpponentPosition(index: number, total: number): React.CSSProperties 
   const angle = Math.PI - 0.35 - t * (Math.PI - 0.7);
   const cx = 50;
   const cy = 48;
-  const rx = 40;
-  const ry = 33;
+  const rx = 39;
+  const ry = 34;
   const x = cx + rx * Math.cos(angle);
   const y = cy - ry * Math.sin(angle);
   return {
@@ -788,7 +788,7 @@ const OpponentSeat: React.FC<{ player: ClientPlayerInGame }> = ({ player }) => {
         scale: player.isTurn ? 1.05 : 1,
       }}
       transition={{ duration: 0.2 }}
-      className={`flex flex-col items-center p-1 sm:p-2 rounded-lg transition-all duration-200 relative min-w-[70px] sm:min-w-[96px] max-w-[80px] sm:max-w-none ${
+      className={`flex flex-col items-center p-0.5 sm:p-2 rounded-lg transition-all duration-200 relative w-[48px] xs:w-[54px] sm:w-auto sm:min-w-[96px] ${
         player.isTurn
           ? 'bg-parchment-50 ring-2 ring-brass shadow-xl'
           : player.folded
@@ -806,7 +806,7 @@ const OpponentSeat: React.FC<{ player: ClientPlayerInGame }> = ({ player }) => {
       )}
 
       {/* Cards Display */}
-      <div className="flex items-center gap-0.5 sm:gap-1 mb-1 sm:mb-1.5">
+      <div className="flex items-center -space-x-2.5 sm:space-x-1 mb-0.5 sm:mb-1.5">
         {player.cards.length > 0 ? (
           player.cards.map((card, i) => (
             <PlayingCard
@@ -818,7 +818,7 @@ const OpponentSeat: React.FC<{ player: ClientPlayerInGame }> = ({ player }) => {
             />
           ))
         ) : (
-          <div className="h-12 sm:h-14 flex items-center justify-center text-[9px] sm:text-[10px] text-parchment-200/40 font-mono">
+          <div className="h-9 sm:h-14 flex items-center justify-center text-[7px] sm:text-[10px] text-parchment-200/40 font-mono">
             Empty
           </div>
         )}
@@ -826,14 +826,14 @@ const OpponentSeat: React.FC<{ player: ClientPlayerInGame }> = ({ player }) => {
 
       {/* Name, Chips, Badges */}
       <div className="text-center space-y-0.5 w-full">
-        <div className="flex items-center justify-center gap-1">
+        <div className="flex items-center justify-center gap-0.5 sm:gap-1">
           {player.isDealer && (
-            <span className="bg-brass text-espresso font-mono font-bold text-[8px] sm:text-[9px] h-3 w-3 sm:h-3.5 sm:w-3.5 rounded-full flex items-center justify-center shrink-0">
+            <span className="bg-brass text-espresso font-mono font-bold text-[7px] sm:text-[9px] h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 rounded-full flex items-center justify-center shrink-0">
               D
             </span>
           )}
           <span
-            className={`font-serif text-[10px] sm:text-xs font-semibold truncate max-w-[62px] sm:max-w-[90px] ${
+            className={`font-sans sm:font-serif text-[8px] xs:text-[9px] sm:text-xs font-semibold truncate max-w-[42px] xs:max-w-[48px] sm:max-w-[90px] ${
               player.isTurn ? 'text-espresso' : 'text-parchment-50'
             }`}
           >
@@ -842,7 +842,7 @@ const OpponentSeat: React.FC<{ player: ClientPlayerInGame }> = ({ player }) => {
         </div>
 
         <div
-          className={`font-mono text-[10px] sm:text-[11px] ${
+          className={`font-mono text-[8px] xs:text-[9px] sm:text-[11px] ${
             player.isTurn ? 'text-espresso-muted' : 'text-brass/90'
           }`}
         >
@@ -850,9 +850,9 @@ const OpponentSeat: React.FC<{ player: ClientPlayerInGame }> = ({ player }) => {
         </div>
 
         {player.isTurn && !player.folded && (
-          <div className="text-[8px] sm:text-[9px] font-mono text-wine font-semibold flex items-center justify-center gap-1">
+          <div className="text-[7px] sm:text-[9px] font-mono text-wine font-semibold flex items-center justify-center gap-0.5 sm:gap-1">
             <span className="h-1 w-1 sm:h-1.5 sm:w-1.5 rounded-full bg-wine animate-ping" />
-            <span>Thinking...</span>
+            <span className="hidden sm:inline">Thinking...</span>
           </div>
         )}
 
@@ -860,18 +860,18 @@ const OpponentSeat: React.FC<{ player: ClientPlayerInGame }> = ({ player }) => {
           <motion.div
             initial={{ scale: 0.7, opacity: 0, y: 3 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-0.5 sm:gap-1 bg-felt/90 text-parchment-50 font-mono text-[9px] sm:text-[10px] px-1 sm:px-1.5 py-0.2 rounded-full mt-0.5 border border-brass/30"
+            className="inline-flex items-center gap-0.5 sm:gap-1 bg-felt/90 text-parchment-50 font-mono text-[7px] sm:text-[10px] px-1 sm:px-1.5 py-0.2 rounded-full mt-0.5 border border-brass/30"
           >
-            <Coins className="h-2 w-2 sm:h-2.5 sm:w-2.5 text-brass" />
+            <Coins className="h-1.5 w-1.5 sm:h-2.5 sm:w-2.5 text-brass" />
             <span>{formatChips(player.currentBet)}</span>
           </motion.div>
         )}
 
         {player.folded && (
-          <div className="text-[9px] sm:text-[10px] font-serif text-wine font-semibold">Folded</div>
+          <div className="text-[7px] sm:text-[10px] font-sans sm:font-serif text-wine font-semibold">Folded</div>
         )}
         {player.isAllIn && (
-          <div className="text-[9px] sm:text-[10px] font-serif text-brass font-bold">ALL-IN</div>
+          <div className="text-[7px] sm:text-[10px] font-sans sm:font-serif text-brass font-bold">ALL-IN</div>
         )}
       </div>
     </motion.div>

@@ -287,7 +287,7 @@ export default function Home() {
                         }`}
                       >
                         <Trophy className="h-3 w-3 text-brass" />
-                        <span>Biggest Winners</span>
+                        <span><span className="hidden sm:inline">Biggest </span>Winners</span>
                       </button>
 
                       <button
@@ -300,7 +300,7 @@ export default function Home() {
                         }`}
                       >
                         <TrendingDown className="h-3 w-3" />
-                        <span>Biggest Losers</span>
+                        <span><span className="hidden sm:inline">Biggest </span>Losers</span>
                       </button>
 
                       <button
@@ -312,7 +312,7 @@ export default function Home() {
                             : 'bg-parchment-100 hover:bg-parchment-200 text-espresso-muted border-border'
                         }`}
                       >
-                        <span>Gross Won</span>
+                        <span><span className="hidden sm:inline">Gross </span>Won</span>
                       </button>
 
                       <button
@@ -324,7 +324,7 @@ export default function Home() {
                             : 'bg-parchment-100 hover:bg-parchment-200 text-espresso-muted border-border'
                         }`}
                       >
-                        <span>Gross Lost</span>
+                        <span><span className="hidden sm:inline">Gross </span>Lost</span>
                       </button>
                     </div>
 

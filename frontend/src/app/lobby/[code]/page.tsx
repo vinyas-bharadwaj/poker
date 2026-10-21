@@ -409,7 +409,7 @@ export default function TableLobbyPage() {
                   : 'Table Waiting'}
               </span>
             </div>
-            <span>•</span>
+            <span className="hidden sm:inline text-espresso-muted">•</span>
             <div className="flex items-center gap-1 text-espresso-muted">
               <Coins className="h-3.5 w-3.5 text-brass" />
               <span>
@@ -419,7 +419,7 @@ export default function TableLobbyPage() {
                 </strong>
               </span>
             </div>
-            <span>•</span>
+            <span className="hidden sm:inline text-espresso-muted">•</span>
             <div className="flex items-center gap-1 text-espresso-muted">
               <Shield className="h-3.5 w-3.5 text-felt" />
               <span>

@@ -297,12 +297,12 @@ export default function LobbyHubPage() {
                           <Shield className="h-3 w-3 text-felt" />
                           Master: {room.gameMasterUsername}
                         </span>
-                        <span>•</span>
+                        <span className="hidden sm:inline text-border">•</span>
                         <span className="flex items-center gap-1">
                           <Users className="h-3 w-3" />
                           {room.players.length}/{room.config.maxPlayers} Seated
                         </span>
-                        <span>•</span>
+                        <span className="hidden sm:inline text-border">•</span>
                         <span className="flex items-center gap-1">
                           <Coins className="h-3 w-3 text-brass" />
                           Blinds: {formatChips(room.config.smallBlind)}/
