@@ -333,40 +333,41 @@ export default function TableLobbyPage() {
 
       {/* Header */}
       <header className="border-b border-border/80 bg-parchment-50/90 backdrop-blur-sm sticky top-0 z-40">
-        <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
+        <div className="max-w-5xl mx-auto px-3 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
+          <div className="flex items-center space-x-2 sm:space-x-3 min-w-0">
             <button
               onClick={handleLeaveTable}
-              className="text-xs font-serif text-espresso-muted hover:text-espresso flex items-center gap-1 cursor-pointer transition-colors"
+              className="text-xs font-serif text-espresso-muted hover:text-espresso flex items-center gap-1 cursor-pointer transition-colors shrink-0"
+              title="Leave Table"
             >
               <ArrowLeft className="h-3.5 w-3.5" />
-              <span>Leave Table</span>
+              <span className="hidden sm:inline">Leave Table</span>
             </button>
-            <span className="text-border">|</span>
-            <div>
-              <span className="font-serif text-base font-normal text-espresso flex items-center gap-2">
-                <span className="text-felt">♠</span>
-                {room.name}
+            <span className="text-border hidden sm:inline">|</span>
+            <div className="truncate min-w-0">
+              <span className="font-serif text-sm sm:text-base font-normal text-espresso flex items-center gap-1.5 truncate">
+                <span className="text-felt shrink-0">♠</span>
+                <span className="truncate">{room.name}</span>
               </span>
             </div>
           </div>
 
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-1.5 sm:space-x-3 shrink-0">
             <Button
               variant="outline"
               size="sm"
               onClick={handleCopyCode}
-              className="text-xs font-mono tracking-wider gap-1.5"
+              className="text-xs font-mono tracking-wider gap-1 sm:gap-1.5 px-2 sm:px-3"
             >
               {copied ? (
                 <>
                   <Check className="h-3.5 w-3.5 text-felt" />
-                  <span>COPIED</span>
+                  <span className="hidden sm:inline">COPIED</span>
                 </>
               ) : (
                 <>
                   <Copy className="h-3.5 w-3.5 text-espresso-muted" />
-                  <span>CODE: {room.code}</span>
+                  <span><span className="hidden sm:inline">CODE: </span>{room.code}</span>
                 </>
               )}
             </Button>
@@ -375,7 +376,8 @@ export default function TableLobbyPage() {
               variant="secondary"
               size="sm"
               onClick={handleLeaveTable}
-              className="text-xs text-wine hover:text-wine-dark gap-1 cursor-pointer"
+              className="text-xs text-wine hover:text-wine-dark gap-1 cursor-pointer px-2 sm:px-3"
+              title="Stand Up / Exit"
             >
               <LogOut className="h-3.5 w-3.5" />
               <span className="hidden sm:inline">Stand Up</span>
@@ -385,9 +387,9 @@ export default function TableLobbyPage() {
       </header>
 
       {/* Main Table Content */}
-      <main className="max-w-5xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full space-y-6">
+      <main className="max-w-5xl mx-auto px-2 sm:px-6 py-4 sm:py-6 flex-1 w-full space-y-4 sm:space-y-6">
         {/* Table Specifications Bar */}
-        <div className="rounded-lg border border-border bg-parchment-50 p-3.5 shadow-classic flex flex-wrap items-center justify-between gap-3 text-xs font-serif text-espresso">
+        <div className="rounded-lg border border-border bg-parchment-50 p-2.5 sm:p-3.5 shadow-classic flex flex-wrap items-center justify-between gap-2.5 sm:gap-3 text-xs font-serif text-espresso">
           <div className="flex flex-wrap items-center gap-3">
             <div className="flex items-center gap-1.5">
               <span
@@ -560,7 +562,7 @@ export default function TableLobbyPage() {
 
             {/* Game Master Action Bar / Player Readiness */}
             <Card className="border-border shadow-classic">
-              <CardContent className="p-6">
+              <CardContent className="p-4 sm:p-6">
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                   <div className="space-y-1 text-center sm:text-left">
                     <h4 className="font-serif text-base font-normal text-espresso">
@@ -577,13 +579,13 @@ export default function TableLobbyPage() {
                     </p>
                   </div>
 
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3 w-full sm:w-auto justify-center">
                     {!isGameMaster && (
                       <Button
                         variant={currentPlayer?.isReady ? 'outline' : 'poker'}
                         size="sm"
                         onClick={handleToggleReady}
-                        className="text-xs font-serif cursor-pointer"
+                        className="text-xs font-serif cursor-pointer w-full sm:w-auto"
                       >
                         {currentPlayer?.isReady ? 'Unmark Ready' : 'Mark Ready'}
                       </Button>
@@ -595,7 +597,7 @@ export default function TableLobbyPage() {
                         size="lg"
                         disabled={!canStartGame || actionLoading}
                         onClick={handleStartGame}
-                        className="text-xs font-serif gap-2 px-6 shadow-sm cursor-pointer"
+                        className="text-xs font-serif gap-2 px-6 shadow-sm cursor-pointer w-full sm:w-auto"
                       >
                         <Play className="h-4 w-4 fill-espresso" />
                         <span>Deal Cards &amp; Start</span>

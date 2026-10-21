@@ -29,9 +29,9 @@ export const PlayingCard: React.FC<PlayingCardProps> = ({
   const isRed = card?.suit === 'hearts' || card?.suit === 'diamonds';
 
   const sizeClasses = {
-    sm: 'w-10 h-14 text-xs rounded',
-    md: 'w-14 h-20 text-sm rounded-md',
-    lg: 'w-18 h-26 text-base rounded-lg',
+    sm: 'w-8 h-12 sm:w-10 sm:h-14 text-[10px] sm:text-xs rounded',
+    md: 'w-11 h-16 sm:w-14 sm:h-20 text-xs sm:text-sm rounded sm:rounded-md',
+    lg: 'w-16 h-22 sm:w-18 sm:h-26 text-sm sm:text-base rounded-lg',
   }[size];
 
   // Face Down Card
@@ -50,7 +50,7 @@ export const PlayingCard: React.FC<PlayingCardProps> = ({
       >
         <div className="absolute inset-1 rounded-xs border border-brass/30 flex items-center justify-center">
           <div className="w-full h-full opacity-25 bg-[radial-gradient(#c6a25a_1px,transparent_1px)] [background-size:6px_6px]" />
-          <span className="absolute text-brass/70 font-serif text-[10px]">♠</span>
+          <span className="absolute text-brass/70 font-serif text-[9px] sm:text-[10px]">♠</span>
         </div>
       </motion.div>
     );
@@ -63,27 +63,35 @@ export const PlayingCard: React.FC<PlayingCardProps> = ({
       initial={{ opacity: 0, scale: 0.88, y: -6 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ duration: 0.22, ease: 'easeOut' }}
-      className={`relative select-none bg-parchment-50 border border-border/80 shadow-classic flex flex-col justify-between p-1 transition-all duration-200 ${sizeClasses} ${
+      className={`relative select-none bg-parchment-50 border border-border/80 shadow-classic flex flex-col justify-between p-0.5 sm:p-1 transition-all duration-200 ${sizeClasses} ${
         isRed ? 'text-wine' : 'text-espresso'
       } ${folded ? 'opacity-40 grayscale' : ''} ${className}`}
     >
       {/* Top Left Corner */}
       <div className="flex flex-col items-center leading-none">
-        <span className="font-mono font-bold text-xs tracking-tighter">{card.rank}</span>
-        <span className="text-[10px] leading-tight">{symbol}</span>
+        <span className="font-mono font-bold text-[10px] sm:text-xs tracking-tighter">{card.rank}</span>
+        <span className="text-[9px] sm:text-[10px] leading-tight">{symbol}</span>
       </div>
 
       {/* Center Suit Emblem */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-85">
-        <span className={size === 'sm' ? 'text-base' : size === 'md' ? 'text-2xl' : 'text-3xl'}>
+        <span
+          className={
+            size === 'sm'
+              ? 'text-sm sm:text-base'
+              : size === 'md'
+              ? 'text-lg sm:text-2xl'
+              : 'text-2xl sm:text-3xl'
+          }
+        >
           {symbol}
         </span>
       </div>
 
       {/* Bottom Right Corner (inverted) */}
       <div className="flex flex-col items-center leading-none rotate-180 self-end">
-        <span className="font-mono font-bold text-xs tracking-tighter">{card.rank}</span>
-        <span className="text-[10px] leading-tight">{symbol}</span>
+        <span className="font-mono font-bold text-[10px] sm:text-xs tracking-tighter">{card.rank}</span>
+        <span className="text-[9px] sm:text-[10px] leading-tight">{symbol}</span>
       </div>
     </motion.div>
   );

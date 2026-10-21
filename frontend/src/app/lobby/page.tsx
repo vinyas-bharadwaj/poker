@@ -127,37 +127,37 @@ export default function LobbyHubPage() {
     <div className="min-h-screen bg-parchment-100 text-espresso flex flex-col font-sans">
       {/* Masthead Header */}
       <header className="border-b border-border/80 bg-parchment-50/90 backdrop-blur-sm sticky top-0 z-40">
-        <div className="max-w-4xl mx-auto px-6 h-20 flex items-center justify-between">
-          <div>
-            <div className="text-[10px] tracking-[0.25em] uppercase font-serif text-espresso-muted">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
+          <div className="min-w-0">
+            <div className="text-[9px] sm:text-[10px] tracking-[0.25em] uppercase font-serif text-espresso-muted">
               Private Texas Hold&apos;em
             </div>
             <Link
               href="/"
-              className="font-serif text-2xl tracking-tight text-espresso font-normal flex items-center gap-2 hover:opacity-90"
+              className="font-serif text-lg sm:text-2xl tracking-tight text-espresso font-normal flex items-center gap-1.5 sm:gap-2 hover:opacity-90 truncate"
             >
-              <span className="text-felt text-xl">♠</span>
-              The Card Room
+              <span className="text-felt text-lg sm:text-xl shrink-0">♠</span>
+              <span>The Card Room</span>
             </Link>
           </div>
 
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-2 sm:space-x-3 shrink-0">
             <Link href="/">
-              <Button variant="outline" size="sm" className="text-xs">
-                ← Club Ledger
+              <Button variant="outline" size="sm" className="text-xs px-2.5 sm:px-3">
+                ← <span className="hidden sm:inline">Club </span>Ledger
               </Button>
             </Link>
             {user ? (
               <Link href="/profile">
-                <Button variant="secondary" size="sm" className="text-xs font-serif">
-                  ♠ {user.username}
+                <Button variant="secondary" size="sm" className="text-xs font-serif px-2.5 sm:px-3">
+                  <span>♠ </span><span className="hidden sm:inline">{user.username}</span>
                 </Button>
               </Link>
             ) : (
               <Link href="/login?redirect=/lobby">
-                <Button variant="poker" size="sm" className="text-xs gap-1.5">
+                <Button variant="poker" size="sm" className="text-xs gap-1.5 px-2.5 sm:px-3">
                   <LogIn className="h-3.5 w-3.5" />
-                  Sign In
+                  <span>Sign In</span>
                 </Button>
               </Link>
             )}
@@ -166,11 +166,11 @@ export default function LobbyHubPage() {
       </header>
 
       {/* Main Hub Area */}
-      <main className="max-w-4xl mx-auto px-6 py-8 flex-1 w-full space-y-8">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 flex-1 w-full space-y-6 sm:space-y-8">
         {/* Hub Masthead */}
-        <div className="text-center space-y-1.5 py-2">
-          <h2 className="font-serif text-3xl font-normal text-espresso">Game Room Hub</h2>
-          <p className="font-serif italic text-sm text-espresso-muted">
+        <div className="text-center space-y-1 sm:space-y-1.5 py-1 sm:py-2">
+          <h2 className="font-serif text-2xl sm:text-3xl font-normal text-espresso">Game Room Hub</h2>
+          <p className="font-serif italic text-xs sm:text-sm text-espresso-muted">
             Host a private table for your circle or enter an invite code to take a seat.
           </p>
         </div>
@@ -336,7 +336,7 @@ export default function LobbyHubPage() {
           aria-modal="true"
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-espresso/30 backdrop-blur-xs"
         >
-          <div className="bg-parchment-50 border border-border shadow-paper rounded-lg max-w-md w-full p-6 space-y-4 animate-in fade-in-0 zoom-in-95">
+          <div className="bg-parchment-50 border border-border shadow-paper rounded-lg max-w-md w-full p-4 sm:p-6 space-y-4 max-h-[90vh] overflow-y-auto animate-in fade-in-0 zoom-in-95">
             <div className="flex items-center justify-between pb-2 border-b border-border/60">
               <div>
                 <h3 className="font-serif text-lg font-normal text-espresso">

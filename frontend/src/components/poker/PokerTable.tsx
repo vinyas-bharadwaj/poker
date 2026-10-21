@@ -240,20 +240,20 @@ export const PokerTable: React.FC<PokerTableProps> = ({
   ]);
 
   return (
-    <div className="flex flex-col items-center w-full max-w-5xl mx-auto space-y-4">
+    <div className="flex flex-col items-center w-full max-w-5xl mx-auto space-y-3 sm:space-y-4">
       {/* Hand Status Bar */}
-      <div className="w-full flex items-center justify-between text-xs font-serif text-espresso px-2">
-        <div className="flex items-center gap-2">
-          <Badge variant="outline" className="font-mono text-[11px] uppercase tracking-wider">
+      <div className="w-full flex items-center justify-between text-xs font-serif text-espresso px-1 sm:px-2">
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <Badge variant="outline" className="font-mono text-[10px] sm:text-[11px] uppercase tracking-wider px-1.5 sm:px-2.5">
             Hand #{gameState.handNumber}
           </Badge>
           <span className="text-espresso-muted">•</span>
-          <Badge variant="success" className="text-[11px] uppercase font-mono tracking-wider">
+          <Badge variant="success" className="text-[10px] sm:text-[11px] uppercase font-mono tracking-wider px-1.5 sm:px-2.5">
             {gameState.round}
           </Badge>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           {/* Sound Mute/Unmute */}
           <button
             type="button"
@@ -262,21 +262,21 @@ export const PokerTable: React.FC<PokerTableProps> = ({
             className="p-1 rounded text-espresso-muted hover:text-espresso hover:bg-parchment-200 transition-colors cursor-pointer"
             title={soundOn ? 'Mute sound' : 'Unmute sound'}
           >
-            {soundOn ? <Volume2 className="h-4 w-4 text-felt" /> : <VolumeX className="h-4 w-4 text-wine" />}
+            {soundOn ? <Volume2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-felt" /> : <VolumeX className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-wine" />}
           </button>
 
           <span className="text-border">|</span>
 
-          <div className="flex items-center gap-1.5">
-            <span className="text-espresso-muted">Total Pot:</span>
+          <div className="flex items-center gap-1 sm:gap-1.5">
+            <span className="text-espresso-muted"><span className="hidden sm:inline">Total </span>Pot:</span>
             <motion.span
               key={gameState.pot}
               initial={{ scale: 1.15 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.2 }}
-              className="font-mono font-bold text-sm text-felt flex items-center gap-1"
+              className="font-mono font-bold text-xs sm:text-sm text-felt flex items-center gap-0.5 sm:gap-1"
             >
-              <Coins className="h-3.5 w-3.5 text-brass" />
+              <Coins className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-brass" />
               {formatChips(gameState.pot)}
             </motion.span>
           </div>
@@ -288,10 +288,11 @@ export const PokerTable: React.FC<PokerTableProps> = ({
                 variant="outline"
                 size="sm"
                 onClick={() => setShowEndGameConfirm(true)}
-                className="text-[11px] text-wine hover:text-wine-dark hover:bg-wine/10 border-wine/30 h-7 px-2.5 gap-1 font-serif cursor-pointer"
+                className="text-[10px] sm:text-[11px] text-wine hover:text-wine-dark hover:bg-wine/10 border-wine/30 h-6 sm:h-7 px-2 sm:px-2.5 gap-1 font-serif cursor-pointer"
               >
-                <Flag className="h-3 w-3" />
-                <span>End Game</span>
+                <Flag className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
+                <span className="hidden xs:inline">End Game</span>
+                <span className="xs:hidden">End</span>
               </Button>
             </>
           )}
@@ -304,11 +305,11 @@ export const PokerTable: React.FC<PokerTableProps> = ({
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-parchment-50 border border-wine/40 rounded-xl p-6 max-w-sm w-full space-y-4 text-center shadow-paper"
+            className="bg-parchment-50 border border-wine/40 rounded-xl p-4 sm:p-6 max-w-xs sm:max-w-sm w-full space-y-4 text-center shadow-paper"
           >
-            <AlertTriangle className="h-8 w-8 text-wine mx-auto" />
+            <AlertTriangle className="h-7 w-7 sm:h-8 sm:w-8 text-wine mx-auto" />
             <div className="space-y-1">
-              <h3 className="font-serif text-lg font-normal text-espresso">End Poker Session?</h3>
+              <h3 className="font-serif text-base sm:text-lg font-normal text-espresso">End Poker Session?</h3>
               <p className="text-xs text-espresso-muted font-serif">
                 This will finalize chip counts, calculate all debt settlements, and record lifetime statistics for all players.
               </p>
@@ -320,7 +321,7 @@ export const PokerTable: React.FC<PokerTableProps> = ({
                 onClick={() => setShowEndGameConfirm(false)}
                 className="text-xs font-serif cursor-pointer"
               >
-                Continue Playing
+                Continue
               </Button>
               <Button
                 variant="destructive"
@@ -339,9 +340,9 @@ export const PokerTable: React.FC<PokerTableProps> = ({
       )}
 
       {/* The Felt Table Container */}
-      <div className="relative w-full aspect-[16/9] min-h-[420px] max-h-[520px] rounded-[100px] border-[10px] border-[#3e2723] bg-[#1a382b] shadow-2xl p-4 sm:p-6 overflow-hidden select-none">
+      <div className="relative w-full h-[390px] xs:h-[420px] sm:h-auto sm:aspect-[16/9] sm:min-h-[420px] sm:max-h-[520px] rounded-[48px] sm:rounded-[100px] border-[6px] sm:border-[10px] border-[#3e2723] bg-[#1a382b] shadow-2xl p-2 sm:p-6 overflow-hidden select-none">
         {/* Subtle Felt Texture & Inner Inlay Line */}
-        <div className="absolute inset-3 rounded-[85px] border border-brass/25 pointer-events-none" />
+        <div className="absolute inset-1.5 sm:inset-3 rounded-[40px] sm:rounded-[85px] border border-brass/25 pointer-events-none" />
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:12px_12px] pointer-events-none" />
 
         {/* Dynamic Opponent Seats positioned around the table perimeter */}
@@ -362,25 +363,25 @@ export const PokerTable: React.FC<PokerTableProps> = ({
         )}
 
         {/* Table Center: Pot and Community Cards */}
-        <div className="absolute left-1/2 top-[44%] -translate-x-1/2 -translate-y-1/2 z-10 flex flex-col items-center justify-center space-y-3 w-full max-w-md px-2 pointer-events-none">
+        <div className="absolute left-1/2 top-[44%] -translate-x-1/2 -translate-y-1/2 z-10 flex flex-col items-center justify-center space-y-2 sm:space-y-3 w-full max-w-md px-1 sm:px-2 pointer-events-none">
           {/* Main Pot Display */}
           <motion.div
             key={gameState.pot}
             initial={{ scale: 0.92 }}
             animate={{ scale: 1 }}
             transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-            className="bg-[#12261d]/95 border border-brass/40 px-4 py-1.5 rounded-full shadow-classic flex items-center gap-2"
+            className="bg-[#12261d]/95 border border-brass/40 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full shadow-classic flex items-center gap-1.5 sm:gap-2"
           >
-            <span className="text-[10px] font-mono tracking-wider text-parchment-200 uppercase">
+            <span className="text-[9px] sm:text-[10px] font-mono tracking-wider text-parchment-200 uppercase">
               Pot
             </span>
-            <span className="font-mono font-bold text-base text-brass">
+            <span className="font-mono font-bold text-sm sm:text-base text-brass">
               {formatChips(gameState.pot)}
             </span>
           </motion.div>
 
           {/* 5 Community Card Slots with Staggered Reveal */}
-          <div className="flex items-center justify-center gap-1.5 sm:gap-2.5">
+          <div className="flex items-center justify-center gap-1 sm:gap-2.5">
             {Array.from({ length: 5 }).map((_, idx) => {
               const card = gameState.communityCards[idx];
               return (
@@ -394,8 +395,8 @@ export const PokerTable: React.FC<PokerTableProps> = ({
                       <PlayingCard card={card} size="md" className="shadow-lg" />
                     </motion.div>
                   ) : (
-                    <div className="w-14 h-20 rounded-md border border-dashed border-parchment-100/20 bg-[#12261d]/40 flex items-center justify-center">
-                      <span className="text-parchment-200/20 text-xs font-mono">
+                    <div className="w-11 h-16 sm:w-14 sm:h-20 rounded sm:rounded-md border border-dashed border-parchment-100/20 bg-[#12261d]/40 flex items-center justify-center">
+                      <span className="text-parchment-200/20 text-[9px] sm:text-xs font-mono">
                         {idx < 3 ? 'FLOP' : idx === 3 ? 'TURN' : 'RIVER'}
                       </span>
                     </div>
@@ -413,7 +414,7 @@ export const PokerTable: React.FC<PokerTableProps> = ({
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.25 }}
-                className="bg-parchment-50/95 border border-brass text-espresso px-4 py-2 rounded-lg shadow-classic text-center max-w-md space-y-1"
+                className="bg-parchment-50/95 border border-brass text-espresso px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg shadow-classic text-center max-w-[92%] sm:max-w-md space-y-1 pointer-events-auto"
               >
                 <div className="flex items-center justify-center gap-1.5 text-xs font-serif font-bold text-wine">
                   <Trophy className="h-3.5 w-3.5 text-brass" />
@@ -433,7 +434,7 @@ export const PokerTable: React.FC<PokerTableProps> = ({
 
         {/* Hero (Current User) Seated at Bottom Center */}
         {heroPlayer && (
-          <div className="absolute left-1/2 bottom-3 -translate-x-1/2 z-20 flex flex-col items-center">
+          <div className="absolute left-1/2 bottom-2 sm:bottom-3 -translate-x-1/2 z-20 flex flex-col items-center">
             <HeroSeat
               player={heroPlayer}
               communityCards={gameState.communityCards}
@@ -443,7 +444,7 @@ export const PokerTable: React.FC<PokerTableProps> = ({
       </div>
 
       {/* Action Controls Panel */}
-      <div className="w-full bg-parchment-50 border border-border rounded-xl p-4 shadow-classic space-y-3">
+      <div className="w-full bg-parchment-50 border border-border rounded-xl p-3 sm:p-4 shadow-classic space-y-2.5 sm:space-y-3">
         {gameState.round === 'showdown' ? (
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
             <div className="space-y-0.5">
@@ -453,14 +454,14 @@ export const PokerTable: React.FC<PokerTableProps> = ({
               </p>
             </div>
 
-            <div className="flex items-center gap-2.5">
+            <div className="flex items-center gap-2.5 w-full sm:w-auto justify-center sm:justify-end">
               {isGameMaster && onEndGame && (
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={() => setShowEndGameConfirm(true)}
                   disabled={actionLoading}
-                  className="text-xs font-serif text-wine border-wine/40 hover:bg-wine/10 cursor-pointer"
+                  className="text-xs font-serif text-wine border-wine/40 hover:bg-wine/10 cursor-pointer w-full sm:w-auto"
                 >
                   <Flag className="h-3 w-3 mr-1" />
                   <span>End Session</span>
@@ -473,7 +474,7 @@ export const PokerTable: React.FC<PokerTableProps> = ({
                   size="sm"
                   onClick={onNextHand}
                   disabled={actionLoading}
-                  className="gap-2 font-serif text-xs px-5 cursor-pointer"
+                  className="gap-2 font-serif text-xs px-5 cursor-pointer w-full sm:w-auto"
                 >
                   <Play className="h-3.5 w-3.5 fill-espresso" />
                   <span>Deal Next Hand</span>
@@ -489,15 +490,15 @@ export const PokerTable: React.FC<PokerTableProps> = ({
           <motion.div
             initial={{ opacity: 0, y: 4 }}
             animate={{ opacity: 1, y: 0 }}
-            className="space-y-3"
+            className="space-y-2.5 sm:space-y-3"
           >
             {/* Raise Controls Section (if raise is eligible) */}
             {canRaise && (
-              <div className="space-y-2.5 pt-1 border-b border-border/40 pb-3">
-                <div className="flex flex-wrap items-center justify-between gap-2.5">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-serif text-espresso-muted">Raise Amount:</span>
-                    <div className="flex items-center gap-1 bg-parchment-100 border border-border rounded-md px-2.5 py-1 shadow-inner">
+              <div className="space-y-2 sm:space-y-2.5 pt-0.5 sm:pt-1 border-b border-border/40 pb-2.5 sm:pb-3">
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <span className="text-xs font-serif text-espresso-muted">Raise:</span>
+                    <div className="flex items-center gap-1 bg-parchment-100 border border-border rounded-md px-2 py-0.5 sm:px-2.5 sm:py-1 shadow-inner">
                       <span className="font-mono text-xs text-espresso-muted font-bold">₹</span>
                       <input
                         type="number"
@@ -511,20 +512,19 @@ export const PokerTable: React.FC<PokerTableProps> = ({
                             setRaiseAmount(Math.min(maxRaiseTarget, Math.max(minRaiseTarget, val)));
                           }
                         }}
-                        className="w-20 font-mono font-bold text-xs bg-transparent text-espresso outline-none"
+                        className="w-16 sm:w-20 font-mono font-bold text-xs bg-transparent text-espresso outline-none"
                       />
                     </div>
                   </div>
 
-                  {/* Steppers & Presets */}
-                  <div className="flex flex-wrap items-center gap-1.5">
-                    {/* Stepper Buttons */}
+                  {/* Stepper Buttons */}
+                  <div className="flex items-center gap-1.5">
                     <button
                       type="button"
                       onClick={() => setRaiseAmount((prev) => Math.max(minRaiseTarget, prev - stepperDelta))}
                       disabled={raiseAmount <= minRaiseTarget}
                       aria-label="Decrease raise"
-                      className="p-1 bg-parchment-100 hover:bg-parchment-200 disabled:opacity-40 text-espresso rounded border border-border transition-colors cursor-pointer"
+                      className="p-1 sm:p-1.5 bg-parchment-100 hover:bg-parchment-200 disabled:opacity-40 text-espresso rounded border border-border transition-colors cursor-pointer"
                       title={`-${formatChips(stepperDelta)}`}
                     >
                       <Minus className="h-3 w-3" />
@@ -535,65 +535,65 @@ export const PokerTable: React.FC<PokerTableProps> = ({
                       onClick={() => setRaiseAmount((prev) => Math.min(maxRaiseTarget, prev + stepperDelta))}
                       disabled={raiseAmount >= maxRaiseTarget}
                       aria-label="Increase raise"
-                      className="p-1 bg-parchment-100 hover:bg-parchment-200 disabled:opacity-40 text-espresso rounded border border-border transition-colors cursor-pointer"
+                      className="p-1 sm:p-1.5 bg-parchment-100 hover:bg-parchment-200 disabled:opacity-40 text-espresso rounded border border-border transition-colors cursor-pointer"
                       title={`+${formatChips(stepperDelta)}`}
                     >
                       <Plus className="h-3 w-3" />
                     </button>
-
-                    {/* Presets */}
-                    <button
-                      type="button"
-                      onClick={() => setRaiseAmount(minRaiseTarget)}
-                      className={`text-[11px] font-mono px-2 py-0.5 rounded border transition-colors cursor-pointer ${
-                        raiseAmount === minRaiseTarget
-                          ? 'bg-felt text-parchment-50 border-felt font-bold'
-                          : 'bg-parchment-100 hover:bg-parchment-200 text-espresso border-border'
-                      }`}
-                    >
-                      Min ({formatChips(minRaiseTarget)})
-                    </button>
-
-                    {halfPotTarget > minRaiseTarget && halfPotTarget < maxRaiseTarget && (
-                      <button
-                        type="button"
-                        onClick={() => setRaiseAmount(halfPotTarget)}
-                        className={`text-[11px] font-mono px-2 py-0.5 rounded border transition-colors cursor-pointer ${
-                          raiseAmount === halfPotTarget
-                            ? 'bg-felt text-parchment-50 border-felt font-bold'
-                            : 'bg-parchment-100 hover:bg-parchment-200 text-espresso border-border'
-                        }`}
-                      >
-                        1/2 Pot
-                      </button>
-                    )}
-
-                    {potTarget > minRaiseTarget && potTarget < maxRaiseTarget && (
-                      <button
-                        type="button"
-                        onClick={() => setRaiseAmount(potTarget)}
-                        className={`text-[11px] font-mono px-2 py-0.5 rounded border transition-colors cursor-pointer ${
-                          raiseAmount === potTarget
-                            ? 'bg-felt text-parchment-50 border-felt font-bold'
-                            : 'bg-parchment-100 hover:bg-parchment-200 text-espresso border-border'
-                        }`}
-                      >
-                        Pot
-                      </button>
-                    )}
-
-                    <button
-                      type="button"
-                      onClick={() => setRaiseAmount(maxRaiseTarget)}
-                      className={`text-[11px] font-mono px-2 py-0.5 rounded border transition-colors cursor-pointer font-bold ${
-                        raiseAmount === maxRaiseTarget
-                          ? 'bg-wine text-parchment-50 border-wine'
-                          : 'bg-parchment-100 hover:bg-wine/10 text-wine border-border'
-                      }`}
-                    >
-                      All-In ({formatChips(maxRaiseTarget)})
-                    </button>
                   </div>
+                </div>
+
+                {/* Presets Grid */}
+                <div className="grid grid-cols-4 gap-1 sm:flex sm:items-center sm:gap-1.5 w-full">
+                  <button
+                    type="button"
+                    onClick={() => setRaiseAmount(minRaiseTarget)}
+                    className={`text-[10px] sm:text-[11px] font-mono px-1 sm:px-2 py-1 sm:py-0.5 rounded border transition-colors cursor-pointer text-center truncate ${
+                      raiseAmount === minRaiseTarget
+                        ? 'bg-felt text-parchment-50 border-felt font-bold'
+                        : 'bg-parchment-100 hover:bg-parchment-200 text-espresso border-border'
+                    }`}
+                  >
+                    Min ({formatChips(minRaiseTarget)})
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setRaiseAmount(halfPotTarget)}
+                    disabled={halfPotTarget <= minRaiseTarget || halfPotTarget >= maxRaiseTarget}
+                    className={`text-[10px] sm:text-[11px] font-mono px-1 sm:px-2 py-1 sm:py-0.5 rounded border transition-colors cursor-pointer text-center truncate disabled:opacity-40 ${
+                      raiseAmount === halfPotTarget
+                        ? 'bg-felt text-parchment-50 border-felt font-bold'
+                        : 'bg-parchment-100 hover:bg-parchment-200 text-espresso border-border'
+                    }`}
+                  >
+                    1/2 Pot
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setRaiseAmount(potTarget)}
+                    disabled={potTarget <= minRaiseTarget || potTarget >= maxRaiseTarget}
+                    className={`text-[10px] sm:text-[11px] font-mono px-1 sm:px-2 py-1 sm:py-0.5 rounded border transition-colors cursor-pointer text-center truncate disabled:opacity-40 ${
+                      raiseAmount === potTarget
+                        ? 'bg-felt text-parchment-50 border-felt font-bold'
+                        : 'bg-parchment-100 hover:bg-parchment-200 text-espresso border-border'
+                    }`}
+                  >
+                    Pot
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setRaiseAmount(maxRaiseTarget)}
+                    className={`text-[10px] sm:text-[11px] font-mono px-1 sm:px-2 py-1 sm:py-0.5 rounded border transition-colors cursor-pointer font-bold text-center truncate ${
+                      raiseAmount === maxRaiseTarget
+                        ? 'bg-wine text-parchment-50 border-wine'
+                        : 'bg-parchment-100 hover:bg-wine/10 text-wine border-border'
+                    }`}
+                  >
+                    All-In
+                  </button>
                 </div>
 
                 {/* Range Slider */}
@@ -612,7 +612,7 @@ export const PokerTable: React.FC<PokerTableProps> = ({
             )}
 
             {/* Core Action Buttons: Fold, Check/Call, Raise */}
-            <div className="flex flex-wrap items-center justify-between gap-2.5">
+            <div className="flex flex-wrap items-center justify-between gap-2">
               <div className="text-[11px] font-serif text-espresso-muted hidden sm:flex items-center gap-2">
                 <span>Shortcuts:</span>
                 <kbd className="px-1.5 py-0.5 bg-parchment-200 border border-border rounded font-mono text-[10px]">F</kbd>
@@ -627,15 +627,15 @@ export const PokerTable: React.FC<PokerTableProps> = ({
                 )}
               </div>
 
-              <div className="flex items-center gap-2.5 ml-auto">
+              <div className="grid grid-cols-3 gap-1.5 sm:flex sm:items-center sm:gap-2.5 sm:ml-auto w-full sm:w-auto">
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={handleFold}
                   disabled={actionLoading}
-                  className="text-wine border-wine/40 hover:bg-wine/10 text-xs font-serif px-4 cursor-pointer"
+                  className="text-wine border-wine/40 hover:bg-wine/10 text-xs font-serif px-2 sm:px-4 py-2 sm:py-1.5 w-full sm:w-auto cursor-pointer"
                 >
-                  Fold (F)
+                  Fold<span className="hidden sm:inline"> (F)</span>
                 </Button>
 
                 {canCheck ? (
@@ -644,9 +644,9 @@ export const PokerTable: React.FC<PokerTableProps> = ({
                     size="sm"
                     onClick={handleCheck}
                     disabled={actionLoading}
-                    className="text-xs font-serif px-5 cursor-pointer"
+                    className="text-xs font-serif px-2 sm:px-5 py-2 sm:py-1.5 w-full sm:w-auto cursor-pointer font-semibold"
                   >
-                    Check (C)
+                    Check<span className="hidden sm:inline"> (C)</span>
                   </Button>
                 ) : (
                   <Button
@@ -654,11 +654,11 @@ export const PokerTable: React.FC<PokerTableProps> = ({
                     size="sm"
                     onClick={handleCall}
                     disabled={actionLoading}
-                    className="text-xs font-serif px-5 cursor-pointer font-semibold"
+                    className="text-xs font-serif px-2 sm:px-5 py-2 sm:py-1.5 w-full sm:w-auto cursor-pointer font-semibold truncate"
                   >
                     {isCallAllIn
-                      ? `All-In Call (${formatChips(myChips)}) (C)`
-                      : `Call ${formatChips(toCall)} (C)`}
+                      ? `All-In (${formatChips(myChips)})`
+                      : `Call ${formatChips(toCall)}`}
                   </Button>
                 )}
 
@@ -674,21 +674,21 @@ export const PokerTable: React.FC<PokerTableProps> = ({
                       }
                     }}
                     disabled={actionLoading}
-                    className="text-xs font-serif px-5 cursor-pointer font-semibold"
+                    className="text-xs font-serif px-2 sm:px-5 py-2 sm:py-1.5 w-full sm:w-auto cursor-pointer font-semibold truncate"
                   >
                     {raiseAmount >= maxRaiseTarget
-                      ? `Shove All-In (${formatChips(maxRaiseTarget)}) (R)`
-                      : `Raise to ${formatChips(raiseAmount)} (R)`}
+                      ? `All-In (${formatChips(maxRaiseTarget)})`
+                      : `Raise ${formatChips(raiseAmount)}`}
                   </Button>
                 )}
               </div>
             </div>
           </motion.div>
         ) : (
-          <div className="flex items-center justify-between text-xs font-serif text-espresso-muted">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2 text-xs font-serif text-espresso-muted">
             <div className="flex items-center gap-2">
-              <span className="h-2 w-2 rounded-full bg-felt animate-pulse" />
-              <span>
+              <span className="h-2 w-2 rounded-full bg-felt animate-pulse shrink-0" />
+              <span className="truncate">
                 {heroPlayer?.folded
                   ? 'You folded this hand. Waiting for the hand to complete...'
                   : heroPlayer?.isAllIn
@@ -700,7 +700,7 @@ export const PokerTable: React.FC<PokerTableProps> = ({
               </span>
             </div>
 
-            <div className="font-mono text-espresso">
+            <div className="font-mono text-espresso shrink-0">
               Your Chips: <strong>{formatChips(myChips)}</strong>
             </div>
           </div>
@@ -788,7 +788,7 @@ const OpponentSeat: React.FC<{ player: ClientPlayerInGame }> = ({ player }) => {
         scale: player.isTurn ? 1.05 : 1,
       }}
       transition={{ duration: 0.2 }}
-      className={`flex flex-col items-center p-2 rounded-lg transition-all duration-200 relative min-w-[85px] sm:min-w-[96px] ${
+      className={`flex flex-col items-center p-1 sm:p-2 rounded-lg transition-all duration-200 relative min-w-[70px] sm:min-w-[96px] max-w-[80px] sm:max-w-none ${
         player.isTurn
           ? 'bg-parchment-50 ring-2 ring-brass shadow-xl'
           : player.folded
@@ -806,7 +806,7 @@ const OpponentSeat: React.FC<{ player: ClientPlayerInGame }> = ({ player }) => {
       )}
 
       {/* Cards Display */}
-      <div className="flex items-center gap-1 mb-1.5">
+      <div className="flex items-center gap-0.5 sm:gap-1 mb-1 sm:mb-1.5">
         {player.cards.length > 0 ? (
           player.cards.map((card, i) => (
             <PlayingCard
@@ -818,7 +818,7 @@ const OpponentSeat: React.FC<{ player: ClientPlayerInGame }> = ({ player }) => {
             />
           ))
         ) : (
-          <div className="h-14 flex items-center justify-center text-[10px] text-parchment-200/40 font-mono">
+          <div className="h-12 sm:h-14 flex items-center justify-center text-[9px] sm:text-[10px] text-parchment-200/40 font-mono">
             Empty
           </div>
         )}
@@ -828,12 +828,12 @@ const OpponentSeat: React.FC<{ player: ClientPlayerInGame }> = ({ player }) => {
       <div className="text-center space-y-0.5 w-full">
         <div className="flex items-center justify-center gap-1">
           {player.isDealer && (
-            <span className="bg-brass text-espresso font-mono font-bold text-[9px] h-3.5 w-3.5 rounded-full flex items-center justify-center shrink-0">
+            <span className="bg-brass text-espresso font-mono font-bold text-[8px] sm:text-[9px] h-3 w-3 sm:h-3.5 sm:w-3.5 rounded-full flex items-center justify-center shrink-0">
               D
             </span>
           )}
           <span
-            className={`font-serif text-xs font-semibold truncate max-w-[80px] sm:max-w-[90px] ${
+            className={`font-serif text-[10px] sm:text-xs font-semibold truncate max-w-[62px] sm:max-w-[90px] ${
               player.isTurn ? 'text-espresso' : 'text-parchment-50'
             }`}
           >
@@ -842,7 +842,7 @@ const OpponentSeat: React.FC<{ player: ClientPlayerInGame }> = ({ player }) => {
         </div>
 
         <div
-          className={`font-mono text-[11px] ${
+          className={`font-mono text-[10px] sm:text-[11px] ${
             player.isTurn ? 'text-espresso-muted' : 'text-brass/90'
           }`}
         >
@@ -850,8 +850,8 @@ const OpponentSeat: React.FC<{ player: ClientPlayerInGame }> = ({ player }) => {
         </div>
 
         {player.isTurn && !player.folded && (
-          <div className="text-[9px] font-mono text-wine font-semibold flex items-center justify-center gap-1">
-            <span className="h-1.5 w-1.5 rounded-full bg-wine animate-ping" />
+          <div className="text-[8px] sm:text-[9px] font-mono text-wine font-semibold flex items-center justify-center gap-1">
+            <span className="h-1 w-1 sm:h-1.5 sm:w-1.5 rounded-full bg-wine animate-ping" />
             <span>Thinking...</span>
           </div>
         )}
@@ -860,18 +860,18 @@ const OpponentSeat: React.FC<{ player: ClientPlayerInGame }> = ({ player }) => {
           <motion.div
             initial={{ scale: 0.7, opacity: 0, y: 3 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-1 bg-felt/90 text-parchment-50 font-mono text-[10px] px-1.5 py-0.2 rounded-full mt-0.5 border border-brass/30"
+            className="inline-flex items-center gap-0.5 sm:gap-1 bg-felt/90 text-parchment-50 font-mono text-[9px] sm:text-[10px] px-1 sm:px-1.5 py-0.2 rounded-full mt-0.5 border border-brass/30"
           >
-            <Coins className="h-2.5 w-2.5 text-brass" />
+            <Coins className="h-2 w-2 sm:h-2.5 sm:w-2.5 text-brass" />
             <span>{formatChips(player.currentBet)}</span>
           </motion.div>
         )}
 
         {player.folded && (
-          <div className="text-[10px] font-serif text-wine font-semibold">Folded</div>
+          <div className="text-[9px] sm:text-[10px] font-serif text-wine font-semibold">Folded</div>
         )}
         {player.isAllIn && (
-          <div className="text-[10px] font-serif text-brass font-bold">ALL-IN</div>
+          <div className="text-[9px] sm:text-[10px] font-serif text-brass font-bold">ALL-IN</div>
         )}
       </div>
     </motion.div>
@@ -886,13 +886,13 @@ const HeroSeat: React.FC<{
   const heroHand = evaluateHeroHand(player.cards, communityCards);
 
   return (
-    <div className="flex flex-col items-center space-y-1.5">
+    <div className="flex flex-col items-center space-y-1 sm:space-y-1.5">
       {/* Evaluated Hand Strength Pill */}
       {heroHand && !player.folded && (
         <motion.div
           initial={{ opacity: 0, y: 2, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          className={`inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[11px] font-serif border shadow-sm ${
+          className={`inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-0.5 rounded-full text-[10px] sm:text-[11px] font-serif border shadow-sm ${
             heroHand.rankLevel >= 7
               ? 'bg-brass text-espresso border-brass font-bold shadow-md'
               : heroHand.rankLevel >= 4
@@ -902,8 +902,8 @@ const HeroSeat: React.FC<{
               : 'bg-parchment-100/90 text-espresso-muted border-border/80'
           }`}
         >
-          <Sparkles className="h-3 w-3 text-brass shrink-0" />
-          <span className="font-mono text-[9px] uppercase tracking-wider opacity-75">
+          <Sparkles className="h-2.5 w-2.5 sm:h-3 sm:w-3 text-brass shrink-0" />
+          <span className="font-mono text-[8px] sm:text-[9px] uppercase tracking-wider opacity-75">
             {heroHand.subtitle}:
           </span>
           <span className="font-semibold">{heroHand.title}</span>
@@ -916,7 +916,7 @@ const HeroSeat: React.FC<{
           scale: player.isTurn ? 1.03 : 1,
         }}
         transition={{ duration: 0.2 }}
-        className={`flex items-center gap-3 p-2.5 rounded-xl transition-all duration-200 relative ${
+        className={`flex items-center gap-2 sm:gap-3 p-1.5 sm:p-2.5 rounded-lg sm:rounded-xl transition-all duration-200 relative ${
           player.isTurn
             ? 'bg-parchment-50 ring-2 ring-brass shadow-2xl'
             : 'bg-[#12261d]/95 border border-border/50 text-parchment-50 shadow-md'
@@ -932,7 +932,7 @@ const HeroSeat: React.FC<{
         )}
 
         {/* 2 Hole Cards */}
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-1 sm:gap-1.5">
           {player.cards.map((card, i) => (
             <PlayingCard
               key={i}
@@ -946,24 +946,24 @@ const HeroSeat: React.FC<{
         </div>
 
         {/* Info Block */}
-        <div className="space-y-1">
-          <div className="flex items-center gap-1.5">
+        <div className="space-y-0.5 sm:space-y-1">
+          <div className="flex items-center gap-1 sm:gap-1.5">
             {player.isDealer && (
-              <span className="bg-brass text-espresso font-mono font-bold text-[10px] h-4 w-4 rounded-full flex items-center justify-center shrink-0">
+              <span className="bg-brass text-espresso font-mono font-bold text-[9px] sm:text-[10px] h-3.5 w-3.5 sm:h-4 sm:w-4 rounded-full flex items-center justify-center shrink-0">
                 D
               </span>
             )}
             <span
-              className={`font-serif text-sm font-semibold ${
+              className={`font-serif text-xs sm:text-sm font-semibold ${
                 player.isTurn ? 'text-espresso' : 'text-parchment-50'
               }`}
             >
-              {player.username} <span className="text-[11px] font-normal opacity-75">(You)</span>
+              {player.username} <span className="text-[10px] sm:text-[11px] font-normal opacity-75">(You)</span>
             </span>
           </div>
 
           <div
-            className={`font-mono text-xs font-bold ${
+            className={`font-mono text-[11px] sm:text-xs font-bold ${
               player.isTurn ? 'text-felt' : 'text-brass'
             }`}
           >
@@ -971,7 +971,7 @@ const HeroSeat: React.FC<{
           </div>
 
           {player.isTurn && !player.folded && (
-            <div className="text-[9px] font-mono font-bold text-wine bg-wine/10 border border-wine/20 px-1.5 py-0.2 rounded-full animate-pulse inline-block">
+            <div className="text-[8px] sm:text-[9px] font-mono font-bold text-wine bg-wine/10 border border-wine/20 px-1.5 py-0.2 rounded-full animate-pulse inline-block">
               YOUR TURN
             </div>
           )}
@@ -980,18 +980,18 @@ const HeroSeat: React.FC<{
             <motion.div
               initial={{ scale: 0.8 }}
               animate={{ scale: 1 }}
-              className="inline-flex items-center gap-1 bg-felt text-parchment-50 font-mono text-[10px] px-2 py-0.5 rounded-full"
+              className="inline-flex items-center gap-1 bg-felt text-parchment-50 font-mono text-[9px] sm:text-[10px] px-1.5 sm:px-2 py-0.5 rounded-full"
             >
-              <Coins className="h-2.5 w-2.5 text-brass" />
+              <Coins className="h-2 w-2 sm:h-2.5 sm:w-2.5 text-brass" />
               <span>In Hand: {formatChips(player.currentBet)}</span>
             </motion.div>
           )}
 
           {player.folded && (
-            <span className="text-xs font-serif text-wine font-semibold block">Folded</span>
+            <span className="text-[10px] sm:text-xs font-serif text-wine font-semibold block">Folded</span>
           )}
           {player.isAllIn && (
-            <span className="text-xs font-serif text-brass font-bold block">ALL-IN</span>
+            <span className="text-[10px] sm:text-xs font-serif text-brass font-bold block">ALL-IN</span>
           )}
         </div>
       </motion.div>

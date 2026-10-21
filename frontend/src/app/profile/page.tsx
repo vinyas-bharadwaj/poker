@@ -58,21 +58,21 @@ export default function ProfilePage() {
     <div className="min-h-screen bg-parchment-100 text-espresso flex flex-col font-sans">
       {/* Masthead Header */}
       <header className="border-b border-border/80 bg-parchment-50/90 backdrop-blur-sm sticky top-0 z-40">
-        <div className="max-w-4xl mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
+          <div className="flex items-center space-x-2 sm:space-x-3 min-w-0">
             <Link
               href="/"
-              className="font-serif text-2xl tracking-tight text-espresso font-normal flex items-center gap-2 hover:opacity-90"
+              className="font-serif text-lg sm:text-2xl tracking-tight text-espresso font-normal flex items-center gap-1.5 sm:gap-2 hover:opacity-90 truncate"
             >
-              <span className="text-felt text-xl">♠</span>
-              The Card Room
+              <span className="text-felt text-lg sm:text-xl shrink-0">♠</span>
+              <span>The Card Room</span>
             </Link>
           </div>
 
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-2 sm:space-x-3 shrink-0">
             <Link href="/">
-              <Button variant="outline" size="sm" className="text-xs">
-                ← Back to Club Ledger
+              <Button variant="outline" size="sm" className="text-xs px-2.5 sm:px-3">
+                ← <span className="hidden sm:inline">Back to </span>Ledger
               </Button>
             </Link>
             <Button
@@ -82,39 +82,43 @@ export default function ProfilePage() {
                 logout();
                 router.push('/login');
               }}
-              className="text-xs gap-1.5 text-wine hover:text-wine-dark"
+              className="text-xs gap-1 sm:gap-1.5 text-wine hover:text-wine-dark px-2 sm:px-3"
             >
               <LogOut className="h-3.5 w-3.5" />
-              Sign Out
+              <span className="hidden sm:inline">Sign Out</span>
             </Button>
           </div>
         </div>
       </header>
 
       {/* Main Profile Body */}
-      <main className="max-w-4xl mx-auto px-6 py-8 flex-1 w-full space-y-6">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 flex-1 w-full space-y-6">
         {/* Profile Banner */}
-        <div className="rounded-lg border border-border bg-parchment-50 p-6 shadow-classic">
+        <div className="rounded-lg border border-border bg-parchment-50 p-4 sm:p-6 shadow-classic">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="space-y-1">
               <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-sm bg-felt/10 text-felt text-xs font-serif border border-felt/20">
                 <span>♠ Member in Good Standing</span>
               </div>
-              <h1 className="font-serif text-3xl font-normal text-espresso">
+              <h1 className="font-serif text-2xl sm:text-3xl font-normal text-espresso">
                 {user.username}
               </h1>
-              <p className="text-xs text-espresso-muted font-serif flex items-center gap-1.5">
-                <Mail className="h-3.5 w-3.5" />
-                <span>{user.email}</span>
-                <span>•</span>
-                <Calendar className="h-3.5 w-3.5" />
-                <span>
-                  Joined{' '}
-                  {new Date(user.createdAt).toLocaleDateString(undefined, {
-                    year: 'numeric',
-                    month: 'short',
-                    day: 'numeric',
-                  })}
+              <p className="text-xs text-espresso-muted font-serif flex flex-wrap items-center gap-x-2 gap-y-1">
+                <span className="flex items-center gap-1">
+                  <Mail className="h-3.5 w-3.5" />
+                  <span>{user.email}</span>
+                </span>
+                <span className="hidden sm:inline">•</span>
+                <span className="flex items-center gap-1">
+                  <Calendar className="h-3.5 w-3.5" />
+                  <span>
+                    Joined{' '}
+                    {new Date(user.createdAt).toLocaleDateString(undefined, {
+                      year: 'numeric',
+                      month: 'short',
+                      day: 'numeric',
+                    })}
+                  </span>
                 </span>
               </p>
             </div>
@@ -123,7 +127,7 @@ export default function ProfilePage() {
               variant="outline"
               size="sm"
               onClick={refreshUser}
-              className="text-xs self-start sm:self-auto gap-1"
+              className="text-xs self-start sm:self-auto gap-1 w-full sm:w-auto"
             >
               <RotateCw className="h-3 w-3" />
               Refresh Stats
@@ -132,7 +136,7 @@ export default function ProfilePage() {
         </div>
 
         {/* Lifetime Stats Overview Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
           {/* Lifetime Winnings */}
           <Card className="border-border shadow-classic">
             <CardHeader className="pb-1">

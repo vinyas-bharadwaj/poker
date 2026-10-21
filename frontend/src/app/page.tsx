@@ -115,18 +115,18 @@ export default function Home() {
     <div className="min-h-screen bg-parchment-100 text-espresso flex flex-col font-sans">
       {/* Masthead Header */}
       <header className="border-b border-border/80 bg-parchment-50/90 backdrop-blur-sm sticky top-0 z-40">
-        <div className="max-w-4xl mx-auto px-6 h-20 flex items-center justify-between">
-          <div>
-            <div className="text-[10px] tracking-[0.25em] uppercase font-serif text-espresso-muted">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
+          <div className="min-w-0">
+            <div className="text-[9px] sm:text-[10px] tracking-[0.25em] uppercase font-serif text-espresso-muted">
               Private Texas Hold&apos;em
             </div>
-            <h1 className="font-serif text-2xl tracking-tight text-espresso font-normal flex items-center gap-2">
-              <span className="text-felt text-xl">♠</span>
-              The Card Room
+            <h1 className="font-serif text-lg sm:text-2xl tracking-tight text-espresso font-normal flex items-center gap-1.5 sm:gap-2 truncate">
+              <span className="text-felt text-lg sm:text-xl shrink-0">♠</span>
+              <span>The Card Room</span>
             </h1>
           </div>
 
-          <div className="flex items-center space-x-2.5">
+          <div className="flex items-center space-x-1.5 sm:space-x-2.5 shrink-0">
             {health?.database.status === 'connected' ? (
               <span className="hidden sm:inline-flex items-center gap-1.5 text-xs text-felt font-serif px-2.5 py-1 rounded bg-felt/5 border border-felt/20">
                 <span className="h-1.5 w-1.5 rounded-full bg-felt" />
@@ -145,28 +145,28 @@ export default function Home() {
               onClick={loadData}
               disabled={loading}
               title="Refresh ledger"
-              className="text-xs"
+              className="text-xs px-2.5 sm:px-3"
             >
               <RotateCw className={`h-3.5 w-3.5 ${loading ? 'animate-spin' : ''}`} />
             </Button>
 
             <Link href="/lobby">
-              <Button variant="poker" size="sm" className="text-xs font-serif gap-1.5">
+              <Button variant="poker" size="sm" className="text-xs font-serif gap-1 sm:gap-1.5 px-2.5 sm:px-3">
                 <span>♠ Tables</span>
               </Button>
             </Link>
 
             {/* Auth Buttons */}
             {authUser ? (
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-1 sm:space-x-2">
                 <Link href="/profile">
                   <Button
                     variant="outline"
                     size="sm"
-                    className="text-xs gap-1.5 font-serif"
+                    className="text-xs gap-1 sm:gap-1.5 font-serif px-2.5 sm:px-3"
                   >
                     <UserIcon className="h-3.5 w-3.5 text-felt" />
-                    <span>{authUser.username}</span>
+                    <span className="hidden sm:inline">{authUser.username}</span>
                   </Button>
                 </Link>
                 <Button
@@ -174,27 +174,27 @@ export default function Home() {
                   size="sm"
                   onClick={logout}
                   title="Sign out"
-                  className="text-xs text-wine hover:text-wine-dark"
+                  className="text-xs text-wine hover:text-wine-dark px-2 sm:px-3"
                 >
                   <LogOut className="h-3.5 w-3.5" />
                 </Button>
               </div>
             ) : (
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-1 sm:space-x-2">
                 <Link href="/login">
                   <Button
                     variant="outline"
                     size="sm"
-                    className="text-xs gap-1.5 font-serif"
+                    className="text-xs gap-1 sm:gap-1.5 font-serif px-2.5 sm:px-3"
                   >
                     <LogIn className="h-3.5 w-3.5" />
-                    <span>Sign In</span>
+                    <span className="hidden sm:inline">Sign In</span>
                   </Button>
                 </Link>
                 <Link href="/register">
-                  <Button variant="poker" size="sm" className="text-xs gap-1.5">
+                  <Button variant="poker" size="sm" className="text-xs gap-1 sm:gap-1.5 px-2.5 sm:px-3">
                     <UserPlus className="h-3.5 w-3.5" />
-                    <span>Join Club</span>
+                    <span>Join<span className="hidden sm:inline"> Club</span></span>
                   </Button>
                 </Link>
               </div>
@@ -204,18 +204,18 @@ export default function Home() {
       </header>
 
       {/* Main Content Area */}
-      <main className="max-w-4xl mx-auto px-6 py-8 flex-1 w-full space-y-6">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 flex-1 w-full space-y-6">
         {/* Serene Intro & Summary */}
-        <div className="text-center py-4 space-y-1">
-          <p className="font-serif italic text-base text-espresso-muted">
+        <div className="text-center py-2 sm:py-4 space-y-1">
+          <p className="font-serif italic text-sm sm:text-base text-espresso-muted">
             &ldquo;Cards speak for themselves, gentleman.&rdquo;
           </p>
-          <div className="flex items-center justify-center gap-4 text-xs font-serif text-espresso-muted pt-1">
-            <span>{stats?.userCount ?? users.length} Club Members</span>
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-xs font-serif text-espresso-muted pt-1">
+            <span>{stats?.userCount ?? users.length} Members</span>
             <span>•</span>
             <span>{stats?.gameCount ?? games.length} Games Logged</span>
-            <span>•</span>
-            <span>Standard 52-Card Deck</span>
+            <span className="hidden sm:inline">•</span>
+            <span className="hidden sm:inline">Standard 52-Card Deck</span>
           </div>
         </div>
 
@@ -349,12 +349,15 @@ export default function Home() {
                     <Table>
                       <TableHeader>
                         <TableRow>
-                          <TableHead className="w-12 text-center">Rank</TableHead>
-                          <TableHead>Member</TableHead>
-                          <TableHead>Email</TableHead>
-                          <TableHead className="text-right">Won</TableHead>
-                          <TableHead className="text-right">Lost</TableHead>
-                          <TableHead className="text-right">Net Balance</TableHead>
+                          <TableHead className="w-10 sm:w-12 text-center px-2 sm:px-4 text-xs">Rank</TableHead>
+                          <TableHead className="px-2 sm:px-4 text-xs">Member</TableHead>
+                          <TableHead className="hidden md:table-cell px-2 sm:px-4 text-xs">Email</TableHead>
+                          <TableHead className="hidden sm:table-cell text-right px-2 sm:px-4 text-xs">Won</TableHead>
+                          <TableHead className="hidden sm:table-cell text-right px-2 sm:px-4 text-xs">Lost</TableHead>
+                          <TableHead className="text-right px-2 sm:px-4 text-xs">
+                            <span className="sm:hidden">Net</span>
+                            <span className="hidden sm:inline">Net Balance</span>
+                          </TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
@@ -365,7 +368,7 @@ export default function Home() {
                               key={user.id}
                               className={isCurrent ? 'bg-felt/5 font-medium' : ''}
                             >
-                              <TableCell className="text-center font-mono text-xs">
+                              <TableCell className="text-center font-mono text-xs px-2 sm:px-4">
                                 {ledgerSort === 'winners' ? (
                                   user.net > 0 ? (
                                     idx === 0 ? (
@@ -398,29 +401,29 @@ export default function Home() {
                                   <span className="text-espresso-muted">{idx + 1}.</span>
                                 )}
                               </TableCell>
-                              <TableCell className="font-serif font-medium text-espresso">
+                              <TableCell className="font-serif font-medium text-espresso px-2 sm:px-4 text-xs sm:text-sm">
                                 <span className="flex items-center gap-1.5">
-                                  {user.username}
+                                  <span className="truncate max-w-[110px] sm:max-w-none">{user.username}</span>
                                   {isCurrent && (
                                     <Badge
                                       variant="default"
-                                      className="text-[10px] px-1.5 py-0"
+                                      className="text-[9px] sm:text-[10px] px-1 sm:px-1.5 py-0"
                                     >
                                       You
                                     </Badge>
                                   )}
                                 </span>
                               </TableCell>
-                              <TableCell className="text-xs text-espresso-muted">
+                              <TableCell className="hidden md:table-cell text-xs text-espresso-muted px-2 sm:px-4">
                                 {user.email}
                               </TableCell>
-                              <TableCell className="text-right text-felt font-mono text-xs font-medium">
+                              <TableCell className="hidden sm:table-cell text-right text-felt font-mono text-xs font-medium px-2 sm:px-4">
                                 {formatChips(user.lifetimeWinnings)}
                               </TableCell>
-                              <TableCell className="text-right text-wine font-mono text-xs font-medium">
+                              <TableCell className="hidden sm:table-cell text-right text-wine font-mono text-xs font-medium px-2 sm:px-4">
                                 {formatChips(user.lifetimeLosses)}
                               </TableCell>
-                              <TableCell className="text-right font-mono text-xs font-semibold">
+                              <TableCell className="text-right font-mono text-xs font-semibold px-2 sm:px-4">
                                 <span
                                   className={`inline-flex items-center gap-1 ${
                                     user.net > 0
@@ -492,7 +495,7 @@ export default function Home() {
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2">
                         {game.players.map((p, idx) => (
                           <div
                             key={idx}
